@@ -1,122 +1,157 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { Checkbox } from "@/components/ui/checkbox";
+
+// Esquema de validación
+const loginSchema = z.object({
+  email: z.string().email({
+    message: "Por favor, introduce un email válido",
+  }),
+  password: z.string().min(1, {
+    message: "La contraseña es obligatoria",
+  }),
+  rememberMe: z.boolean().default(false),
+});
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // This is just a mock authentication for demonstration
-    // In a real app, you would validate against a backend
-    setTimeout(() => {
-      if (formData.email === "admin@example.com" && formData.password === "admin") {
-        // Admin user
-        localStorage.setItem("userRole", "admin");
-        localStorage.setItem("userEmail", formData.email);
-        toast({
-          title: "Sesión iniciada",
-          description: "Has iniciado sesión como administrador.",
+  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+    setIsLoading(true);
+    try {
+      // Simulamos el inicio de sesión (aquí se conectaría con la API real)
+      console.log("Credenciales:", values);
+      
+      // Simulamos un inicio de sesión exitoso
+      setTimeout(() => {
+        toast.success("Inicio de sesión exitoso", {
+          description: "Bienvenido de nuevo a MotoAventura",
         });
-        navigate("/panel/admin");
-      } else if (formData.email === "user@example.com" && formData.password === "user") {
-        // Regular user
-        localStorage.setItem("userRole", "user");
-        localStorage.setItem("userEmail", formData.email);
-        toast({
-          title: "Sesión iniciada",
-          description: "Has iniciado sesión correctamente.",
-        });
-        navigate("/panel/usuario");
-      } else {
-        toast({
-          title: "Error de inicio de sesión",
-          description: "Correo electrónico o contraseña incorrectos.",
-          variant: "destructive",
-        });
-      }
-      setIsSubmitting(false);
-    }, 1000);
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      toast.error("Error al iniciar sesión", {
+        description: "Credenciales incorrectas. Inténtalo de nuevo.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-2">
-        <label htmlFor="email" className="block text-sm font-medium">
-          Correo electrónico
-        </label>
-        <Input
-          id="email"
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
           name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="tu@email.com"
-          required
-          autoComplete="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="tu@email.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <p className="text-xs text-gray-500">
-          Demo admin: admin@example.com / admin
-        </p>
-        <p className="text-xs text-gray-500">
-          Demo usuario: user@example.com / user
-        </p>
-      </div>
-      
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <label htmlFor="password" className="block text-sm font-medium">
-            Contraseña
-          </label>
-          <a href="#" className="text-sm text-aventura-600 hover:text-aventura-500">
-            ¿Olvidaste tu contraseña?
-          </a>
-        </div>
-        <Input
-          id="password"
+        
+        <FormField
+          control={form.control}
           name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Tu contraseña"
-          required
-          autoComplete="current-password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Contraseña</FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    {...field}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-0 top-0 h-full px-3"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </Button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-      
-      <Button
-        type="submit"
-        className="w-full bg-aventura-500 hover:bg-aventura-600"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
-      </Button>
-      
-      <div className="text-center">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          ¿No tienes una cuenta?{" "}
-          <a href="/registro" className="text-aventura-600 hover:text-aventura-500 font-medium">
-            Registrarse
-          </a>
-        </p>
-      </div>
-    </form>
+        
+        <div className="flex items-center justify-between">
+          <FormField
+            control={form.control}
+            name="rememberMe"
+            render={({ field }) => (
+              <FormItem className="flex items-center space-x-2 space-y-0">
+                <FormControl>
+                  <Checkbox 
+                    checked={field.value} 
+                    onCheckedChange={field.onChange} 
+                  />
+                </FormControl>
+                <FormLabel className="text-sm cursor-pointer">Recordarme</FormLabel>
+              </FormItem>
+            )}
+          />
+          
+          <Link to="/recuperar-password" className="text-sm text-aventura-500 hover:underline">
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </div>
+        
+        <Button 
+          type="submit" 
+          className="w-full bg-aventura-500 hover:bg-aventura-600"
+          disabled={isLoading}
+        >
+          {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+        </Button>
+        
+        <div className="text-center mt-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            ¿No tienes una cuenta?{" "}
+            <Link to="/registro" className="text-aventura-500 hover:underline font-medium">
+              Regístrate
+            </Link>
+          </p>
+        </div>
+      </form>
+    </Form>
   );
 };
 
