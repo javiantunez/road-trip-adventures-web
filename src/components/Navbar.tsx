@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CalendarCheck, Map, Menu, X, User } from "lucide-react";
+import { CalendarCheck, Map, Menu, X, User, Calendar, MessageSquare } from "lucide-react";
 import UserMenu from "./UserMenu";
 
 interface NavbarProps {

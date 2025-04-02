@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, ChevronRight, Bell, MessageSquare } from "lucide-react";
+import { Calendar, ChevronRight, Bell, MessageSquare, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
