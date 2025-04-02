@@ -3,8 +3,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CalendarCheck, Map, Menu, X, User } from "lucide-react";
+import UserMenu from "./UserMenu";
 
-const Navbar = () => {
+interface NavbarProps {
+  isLoggedIn?: boolean;
+  userName?: string;
+  userAvatar?: string;
+}
+
+const Navbar = ({ isLoggedIn = false, userName = "", userAvatar = "" }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -22,27 +29,40 @@ const Navbar = () => {
           <Link to="/eventos" className="text-white/90 hover:text-aventura-400 font-medium">Eventos</Link>
           <Link to="/galeria" className="text-white/90 hover:text-aventura-400 font-medium">Galería</Link>
           <Link to="/contacto" className="text-white/90 hover:text-aventura-400 font-medium">Contacto</Link>
-          <Button asChild variant="ghost" className="ml-2">
-            <Link to="/login">
-              <User className="h-4 w-4 mr-2" />
-              Acceso
-            </Link>
-          </Button>
-          <Button asChild className="bg-aventura-500 hover:bg-aventura-600 ml-2">
-            <Link to="/inscribirse">
-              <Map className="h-4 w-4 mr-2" />
-              Inscríbete
-            </Link>
-          </Button>
+          
+          {/* Si el usuario está logueado, mostramos el menú de usuario, si no, los botones de acceso e inscripción */}
+          {isLoggedIn ? (
+            <UserMenu userName={userName} userAvatar={userAvatar} />
+          ) : (
+            <>
+              <Button asChild variant="ghost" className="ml-2">
+                <Link to="/login">
+                  <User className="h-4 w-4 mr-2" />
+                  Acceso
+                </Link>
+              </Button>
+              <Button asChild className="bg-aventura-500 hover:bg-aventura-600 ml-2">
+                <Link to="/inscribirse">
+                  <Map className="h-4 w-4 mr-2" />
+                  Inscríbete
+                </Link>
+              </Button>
+            </>
+          )}
         </nav>
 
         {/* Mobile menu button */}
-        <button 
-          className="md:hidden text-white"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          {isLoggedIn && (
+            <UserMenu userName={userName} userAvatar={userAvatar} />
+          )}
+          <button 
+            className="text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
@@ -53,20 +73,40 @@ const Navbar = () => {
           <Link to="/eventos" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Eventos</Link>
           <Link to="/galeria" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Galería</Link>
           <Link to="/contacto" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Contacto</Link>
-          <div className="flex flex-col gap-2 mt-4">
-            <Button asChild variant="outline" className="w-full">
-              <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+          
+          {!isLoggedIn && (
+            <div className="flex flex-col gap-2 mt-4">
+              <Button asChild variant="outline" className="w-full">
+                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                  <User className="h-4 w-4 mr-2" />
+                  Acceso
+                </Link>
+              </Button>
+              <Button asChild className="bg-aventura-500 hover:bg-aventura-600 w-full">
+                <Link to="/inscribirse" onClick={() => setIsMenuOpen(false)}>
+                  <Map className="h-4 w-4 mr-2" />
+                  Inscríbete
+                </Link>
+              </Button>
+            </div>
+          )}
+          
+          {isLoggedIn && (
+            <div className="flex flex-col gap-2 mt-4">
+              <Link to="/perfil" className="text-white py-3 border-b border-gray-800 flex items-center" onClick={() => setIsMenuOpen(false)}>
                 <User className="h-4 w-4 mr-2" />
-                Acceso
+                Perfil
               </Link>
-            </Button>
-            <Button asChild className="bg-aventura-500 hover:bg-aventura-600 w-full">
-              <Link to="/inscribirse" onClick={() => setIsMenuOpen(false)}>
-                <Map className="h-4 w-4 mr-2" />
-                Inscríbete
+              <Link to="/mis-eventos" className="text-white py-3 border-b border-gray-800 flex items-center" onClick={() => setIsMenuOpen(false)}>
+                <Calendar className="h-4 w-4 mr-2" />
+                Mis eventos
               </Link>
-            </Button>
-          </div>
+              <Link to="/mensajes" className="text-white py-3 border-b border-gray-800 flex items-center" onClick={() => setIsMenuOpen(false)}>
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Mensajes
+              </Link>
+            </div>
+          )}
         </nav>
       )}
     </header>

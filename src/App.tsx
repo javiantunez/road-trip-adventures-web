@@ -12,6 +12,7 @@ import Registro from "./pages/Registro";
 import Inscripcion from "./pages/Inscripcion";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,11 @@ const App = () => (
           <Route path="/registro" element={<Registro />} />
           <Route path="/inscribirse/:id" element={<Inscripcion />} />
           <Route path="/checkout/:id" element={<Checkout />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/perfil" element={<Dashboard />} />
+          <Route path="/mis-eventos" element={<Dashboard />} />
+          <Route path="/mensajes" element={<Dashboard />} />
+          <Route path="/mis-facturas" element={<Dashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
