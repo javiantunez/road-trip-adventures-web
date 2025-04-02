@@ -18,17 +18,21 @@ const Navbar = ({ isLoggedIn = false, userName = "", userAvatar = "" }: NavbarPr
     <header className="fixed w-full bg-black/90 backdrop-blur-sm z-50">
       <div className="container flex items-center justify-between py-4">
         <Link to="/" className="flex items-center gap-2">
-          <CalendarCheck className="h-7 w-7 text-aventura-500" />
-          <span className="text-xl font-bold font-montserrat tracking-wider text-white">MotoAventura</span>
+          <img 
+            src="/lovable-uploads/bdfa6575-9eef-43e6-b578-3034a149fd57.png" 
+            alt="IBS Moto Experiences Logo" 
+            className="h-10"
+          />
+          <span className="text-xl font-bold font-montserrat tracking-wider text-white">IBS Moto Experiences</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link to="/" className="text-white/90 hover:text-aventura-400 font-medium">Inicio</Link>
-          <Link to="/nosotros" className="text-white/90 hover:text-aventura-400 font-medium">Quiénes Somos</Link>
-          <Link to="/eventos" className="text-white/90 hover:text-aventura-400 font-medium">Eventos</Link>
-          <Link to="/galeria" className="text-white/90 hover:text-aventura-400 font-medium">Galería</Link>
-          <Link to="/contacto" className="text-white/90 hover:text-aventura-400 font-medium">Contacto</Link>
+          <Link to="/" className="text-white/90 hover:text-ibs-500 font-medium">Inicio</Link>
+          <Link to="/nosotros" className="text-white/90 hover:text-ibs-500 font-medium">Quiénes Somos</Link>
+          <Link to="/eventos" className="text-white/90 hover:text-ibs-500 font-medium">Eventos</Link>
+          <Link to="/galeria" className="text-white/90 hover:text-ibs-500 font-medium">Galería</Link>
+          <Link to="/contacto" className="text-white/90 hover:text-ibs-500 font-medium">Contacto</Link>
           
           {/* Si el usuario está logueado, mostramos el menú de usuario, si no, los botones de acceso e inscripción */}
           {isLoggedIn ? (
@@ -41,7 +45,7 @@ const Navbar = ({ isLoggedIn = false, userName = "", userAvatar = "" }: NavbarPr
                   Acceso
                 </Link>
               </Button>
-              <Button asChild className="bg-aventura-500 hover:bg-aventura-600 ml-2">
+              <Button asChild className="bg-ibs-500 hover:bg-ibs-600 ml-2">
                 <Link to="/inscribirse">
                   <Map className="h-4 w-4 mr-2" />
                   Inscríbete
@@ -82,7 +86,7 @@ const Navbar = ({ isLoggedIn = false, userName = "", userAvatar = "" }: NavbarPr
                   Acceso
                 </Link>
               </Button>
-              <Button asChild className="bg-aventura-500 hover:bg-aventura-600 w-full">
+              <Button asChild className="bg-ibs-500 hover:bg-ibs-600 w-full">
                 <Link to="/inscribirse" onClick={() => setIsMenuOpen(false)}>
                   <Map className="h-4 w-4 mr-2" />
                   Inscríbete

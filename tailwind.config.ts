@@ -66,6 +66,19 @@ export default {
 					900: '#7e1d12',
 					950: '#450b07',
 				},
+				ibs: {
+					50: '#fef5ee',
+					100: '#fde8d9',
+					200: '#fad0b3',
+					300: '#f7b282',
+					400: '#f3874c',
+					500: '#e25a24', /* Color principal del logo IBS */
+					600: '#d14417',
+					700: '#ad3514',
+					800: '#892c17',
+					900: '#6f2716',
+					950: '#3c130a',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
