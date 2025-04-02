@@ -1,0 +1,76 @@
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { CalendarCheck, Map, Menu, X, User } from "lucide-react";
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <header className="fixed w-full bg-black/90 backdrop-blur-sm z-50">
+      <div className="container flex items-center justify-between py-4">
+        <Link to="/" className="flex items-center gap-2">
+          <CalendarCheck className="h-7 w-7 text-aventura-500" />
+          <span className="text-xl font-bold font-montserrat tracking-wider text-white">MotoAventura</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
+          <Link to="/" className="text-white/90 hover:text-aventura-400 font-medium">Inicio</Link>
+          <Link to="/nosotros" className="text-white/90 hover:text-aventura-400 font-medium">Quiénes Somos</Link>
+          <Link to="/eventos" className="text-white/90 hover:text-aventura-400 font-medium">Eventos</Link>
+          <Link to="/galeria" className="text-white/90 hover:text-aventura-400 font-medium">Galería</Link>
+          <Link to="/contacto" className="text-white/90 hover:text-aventura-400 font-medium">Contacto</Link>
+          <Button asChild variant="ghost" className="ml-2">
+            <Link to="/login">
+              <User className="h-4 w-4 mr-2" />
+              Acceso
+            </Link>
+          </Button>
+          <Button asChild className="bg-aventura-500 hover:bg-aventura-600 ml-2">
+            <Link to="/inscribirse">
+              <Map className="h-4 w-4 mr-2" />
+              Inscríbete
+            </Link>
+          </Button>
+        </nav>
+
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden text-white"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <nav className="md:hidden flex flex-col p-5 bg-black/95 border-t border-gray-800">
+          <Link to="/" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Inicio</Link>
+          <Link to="/nosotros" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Quiénes Somos</Link>
+          <Link to="/eventos" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Eventos</Link>
+          <Link to="/galeria" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Galería</Link>
+          <Link to="/contacto" className="text-white py-3 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>Contacto</Link>
+          <div className="flex flex-col gap-2 mt-4">
+            <Button asChild variant="outline" className="w-full">
+              <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                <User className="h-4 w-4 mr-2" />
+                Acceso
+              </Link>
+            </Button>
+            <Button asChild className="bg-aventura-500 hover:bg-aventura-600 w-full">
+              <Link to="/inscribirse" onClick={() => setIsMenuOpen(false)}>
+                <Map className="h-4 w-4 mr-2" />
+                Inscríbete
+              </Link>
+            </Button>
+          </div>
+        </nav>
+      )}
+    </header>
+  );
+};
+
+export default Navbar;

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,19 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				aventura: {
+					50: '#fff2ed',
+					100: '#ffe1d3',
+					200: '#ffc1a6',
+					300: '#ff9a70',
+					400: '#ff6937',
+					500: '#ff4e12',
+					600: '#f13a09',
+					700: '#c7290a',
+					800: '#9e2111',
+					900: '#7e1d12',
+					950: '#450b07',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -89,7 +103,11 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+			},
+			fontFamily: {
+				montserrat: ['Montserrat', 'sans-serif'],
+				roboto: ['Roboto', 'sans-serif'],
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
