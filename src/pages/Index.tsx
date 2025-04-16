@@ -116,7 +116,7 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md text-center">
-                <div className="h-12 w-12 bg-aventura-100 text-aventura-600 rounded-lg flex items-center justify-center mx-auto mb-6">
+                <div className="h-12 w-12 bg-[#E25A24]/10 text-[#E25A24] rounded-lg flex items-center justify-center mx-auto mb-6">
                   <Map className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">Rutas Excepcionales</h3>
@@ -126,7 +126,7 @@ const Index = () => {
               </div>
               
               <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md text-center">
-                <div className="h-12 w-12 bg-aventura-100 text-aventura-600 rounded-lg flex items-center justify-center mx-auto mb-6">
+                <div className="h-12 w-12 bg-[#E25A24]/10 text-[#E25A24] rounded-lg flex items-center justify-center mx-auto mb-6">
                   <Users className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">Grandes Compañías</h3>
@@ -136,7 +136,7 @@ const Index = () => {
               </div>
               
               <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md text-center">
-                <div className="h-12 w-12 bg-aventura-100 text-aventura-600 rounded-lg flex items-center justify-center mx-auto mb-6">
+                <div className="h-12 w-12 bg-[#E25A24]/10 text-[#E25A24] rounded-lg flex items-center justify-center mx-auto mb-6">
                   <CalendarCheck className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">Organización Perfecta</h3>
@@ -193,12 +193,12 @@ const Index = () => {
                     </svg>
                   ))}
                 </div>
-                <p className="text-white/90 mb-6">
+                <p className="text-black/90 mb-6">
                   "Una experiencia increíble. Rutas espectaculares, alojamientos de primera y un ambiente excepcional. Repetiré seguro en el próximo evento."
                 </p>
                 <div>
-                  <h4 className="font-semibold">Carlos Rodríguez</h4>
-                  <p className="text-white/70 text-sm">Participante en Cantabria Challenge</p>
+                  <h4 className="font-semibold text-black">Carlos Rodríguez</h4>
+                  <p className="text-black/70 text-sm">Participante en Cantabria Challenge</p>
                 </div>
               </div>
               
@@ -210,12 +210,12 @@ const Index = () => {
                     </svg>
                   ))}
                 </div>
-                <p className="text-white/90 mb-6">
+                <p className="text-black/90 mb-6">
                   "Lo que más valoro es la organización. Todo perfectamente coordinado, desde las rutas hasta las comidas. Nunca había participado en un evento así y ahora estoy enganchada."
                 </p>
                 <div>
-                  <h4 className="font-semibold">Laura Martínez</h4>
-                  <p className="text-white/70 text-sm">Participante en Pirineos Adventure</p>
+                  <h4 className="font-semibold text-black">Laura Martínez</h4>
+                  <p className="text-black/70 text-sm">Participante en Pirineos Adventure</p>
                 </div>
               </div>
               
@@ -227,12 +227,12 @@ const Index = () => {
                     </svg>
                   ))}
                 </div>
-                <p className="text-white/90 mb-6">
+                <p className="text-black/90 mb-6">
                   "Mi tercera participación con MotoAventura y cada vez mejor. El equipo es fantástico y siempre están pendientes de cada detalle. Las rutas son sencillamente impresionantes."
                 </p>
                 <div>
-                  <h4 className="font-semibold">Miguel Ángel Fernández</h4>
-                  <p className="text-white/70 text-sm">Participante habitual</p>
+                  <h4 className="font-semibold text-black">Miguel Ángel Fernández</h4>
+                  <p className="text-black/70 text-sm">Participante habitual</p>
                 </div>
               </div>
             </div>
@@ -296,3 +296,4 @@ const Index = () => {
 };
 
 export default Index;
+

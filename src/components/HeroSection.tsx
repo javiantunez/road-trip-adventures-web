@@ -43,7 +43,7 @@ const HeroSection = ({
           {(buttonText || secondaryButtonText) && (
             <div className="flex flex-wrap gap-4">
               {buttonText && buttonLink && (
-                <Button asChild size="lg" className="bg-aventura-500 hover:bg-aventura-600">
+                <Button asChild size="lg" className="bg-[#E25A24] hover:bg-[#C44A1B]">
                   <Link to={buttonLink}>
                     <Calendar className="mr-2 h-5 w-5" />
                     {buttonText}
@@ -52,7 +52,7 @@ const HeroSection = ({
               )}
               
               {secondaryButtonText && secondaryButtonLink && (
-                <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <Button asChild size="lg" className="bg-[#E25A24] hover:bg-[#C44A1B]">
                   <Link to={secondaryButtonLink}>
                     <Map className="mr-2 h-5 w-5" />
                     {secondaryButtonText}
@@ -68,3 +68,4 @@ const HeroSection = ({
 };
 
 export default HeroSection;
+

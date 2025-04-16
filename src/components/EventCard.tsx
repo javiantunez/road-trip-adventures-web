@@ -32,11 +32,11 @@ const EventCard = ({ id, title, date, location, image, isPast = false }: EventCa
       <div className="p-5">
         <h3 className="text-xl font-bold mb-2 line-clamp-2">{title}</h3>
         <div className="flex items-center text-gray-500 dark:text-gray-400 mb-2">
-          <CalendarCheck className="h-4 w-4 mr-2 text-aventura-500" />
+          <CalendarCheck className="h-4 w-4 mr-2 text-[#E25A24]" />
           <span>{date}</span>
         </div>
         <div className="flex items-center text-gray-500 dark:text-gray-400 mb-4">
-          <MapPin className="h-4 w-4 mr-2 text-aventura-500" />
+          <MapPin className="h-4 w-4 mr-2 text-[#E25A24]" />
           <span>{location}</span>
         </div>
         <div className="flex justify-between items-center">
@@ -47,7 +47,7 @@ const EventCard = ({ id, title, date, location, image, isPast = false }: EventCa
           </Button>
           {!isPast && (
             <Button asChild>
-              <Link to={`/inscribirse/${id}`} className="bg-aventura-500 hover:bg-aventura-600">
+              <Link to={`/inscribirse/${id}`} className="bg-[#E25A24] hover:bg-[#C44A1B]">
                 Inscríbete
               </Link>
             </Button>
@@ -59,3 +59,4 @@ const EventCard = ({ id, title, date, location, image, isPast = false }: EventCa
 };
 
 export default EventCard;
+
